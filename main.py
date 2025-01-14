@@ -68,7 +68,7 @@ while True:
         send_tap_request(token)
         time.sleep(2)  # Small delay between requests to avoid rate limits
 
-    if cycle_count % 2 == 0:  # Every 2 cycles, send claim requests
+    if cycle_count % 6 == 0:  # Every 6 cycles, send claim requests
         print("Sending CLAIM requests for all accounts...")
         for token in auth_tokens:
             send_claim_request(token)
