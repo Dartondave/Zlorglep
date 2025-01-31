@@ -1,4 +1,4 @@
-name: Gold Eagle Setup CL
+name: Gold Eagle Setup CI
 
 on:
   workflow_dispatch: # Allows you to manually trigger the workflow
@@ -23,7 +23,7 @@ jobs:
           node-version: '22.11.0'
 
       - name: Install dependencies
-        run: npm install user-agents axios colors p-limit https-proxy-agent socks-proxy-agent crypto-js ws uuid xlsx readline-sync moment lodash
+        run: npm install @faker-js/faker user-agents axios colors p-limit https-proxy-agent socks-proxy-agent crypto-js ws uuid xlsx readline-sync moment lodash
 
       - name: Create configuration files
         run: |
