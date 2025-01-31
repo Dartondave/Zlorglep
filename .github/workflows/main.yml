@@ -1,0 +1,50 @@
+name: Gold Eagle Setup CL
+
+on:
+  workflow_dispatch: # Allows you to manually trigger the workflow
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  setup-bot:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '22.11.0'
+
+      - name: Install dependencies
+        run: npm install user-agents axios colors p-limit https-proxy-agent socks-proxy-agent crypto-js ws uuid xlsx readline-sync moment lodash
+
+      - name: Create configuration files
+        run: |
+          echo '{
+            "timeZone": "en-US",
+            "rotateProxy": false,
+            "skipInvalidProxy": false,
+            "proxyRotationInterval": 2,
+            "delayEachAccount": [5, 8],
+            "timeToRestartAllAccounts": 300,
+            "howManyAccountsRunInOneTime": 100,
+            "doTasks": true
+          }' > configs.json
+          
+          echo 'query_id.../user...' > datas.txt
+          echo 'abc...xyz' > wallets.txt
+          echo '' > proxies.txt
+
+      - name: Run bot continuously
+        run: |
+          while true; do
+            node main.js || echo "Bot encountered an error but will restart..."
+            sleep 5 # Wait for 5 seconds before restarting
+          done
