@@ -45,6 +45,6 @@ jobs:
       - name: Run bot continuously
         run: |
           while true; do
-            node main.js || echo "Bot encountered an error but will restart..."
+            node goldeagle.js || echo "Bot encountered an error but will restart..."
             sleep 5 # Wait for 5 seconds before restarting
           done
